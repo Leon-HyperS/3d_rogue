@@ -1,0 +1,83 @@
+{
+  "project": "Rogue Duels",
+  "version": 1,
+  "assets": [
+    {
+      "id": "player_knight",
+      "category": "character",
+      "path": "characters/Knight_Male.gltf",
+      "sourcePack": "Ultimate Animated Character Pack - Nov 2019",
+      "note": "player fighter model"
+    },
+    {
+      "id": "npc_orc",
+      "category": "enemy",
+      "path": "enemies/Orc.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "challenge NPC and duel opponent"
+    },
+    {
+      "id": "npc_demon",
+      "category": "enemy",
+      "path": "enemies/Demon.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "challenge NPC and duel opponent"
+    },
+    {
+      "id": "env_fence_straight",
+      "category": "environment",
+      "path": "environment/Fence_1.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hub perimeter and arena dressing"
+    },
+    {
+      "id": "env_fence_corner",
+      "category": "environment",
+      "path": "environment/Fence_Corner.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hub perimeter corners"
+    },
+    {
+      "id": "env_fence_middle",
+      "category": "environment",
+      "path": "environment/Fence_Middle.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hub perimeter filler"
+    },
+    {
+      "id": "env_rock_platform_large",
+      "category": "environment",
+      "path": "environment/RockPlatforms_Large.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hub floor edge and duel arena platform"
+    },
+    {
+      "id": "env_rock_platform_medium",
+      "category": "environment",
+      "path": "environment/RockPlatforms_Medium.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hub floor edge and duel arena platform"
+    },
+    {
+      "id": "env_rock_small",
+      "category": "environment",
+      "path": "environment/Rock_1.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "small scene dressing"
+    },
+    {
+      "id": "env_rock_large",
+      "category": "environment",
+      "path": "environment/Rock_2.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "large scene dressing"
+    },
+    {
+      "id": "mechanic_door",
+      "category": "mechanic",
+      "path": "mechanics/Door.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "arena gate and visual transition prop"
+    }
+  ]
+}

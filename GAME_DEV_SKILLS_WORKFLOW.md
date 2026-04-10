@@ -27,7 +27,7 @@ When using this playbook, follow these rules:
 
 1. Decide early whether the game is fundamentally `3D` or `2D`.
 2. Prefer a **small playable slice** over broad unfinished scope.
-3. Use existing cohesive asset packs in this repo before trying to generate all production art from scratch.
+3. Use existing local repo assets first when they fit, but choose freely across the evolving `Free_Assets/` library, other repo assets, and external sources if needed.
 4. Write key project knowledge to Markdown files in the repo instead of keeping it only in conversation context.
 5. Save plans before large implementation passes.
 6. Watch context usage and reset or compact before quality drops.
@@ -40,24 +40,31 @@ This repo already includes a useful local asset source under `Free_Assets/`.
 
 Treat that folder as the **default first place to look** before searching externally or generating major production assets.
 
-Current local packs identified:
+`Free_Assets/` is expected to grow over time.
+
+Do **not** hardcode assumptions that only the currently documented packs exist.
+
+Treat the actual folder contents on disk as the source of truth.
+
+Examples currently present:
 
 - `Free_Assets/Ultimate Monsters`
 - `Free_Assets/Platformer Game Kit - Dec 2021`
 
-Important observations:
+General observations:
 
-- both packs include `glTF` assets, which should be the preferred runtime format for web-game implementation here
-- both packs also include `FBX`, `OBJ`, and `.blend` source variants
-- both include `License.txt` files indicating `CC0 1.0 Universal`
+- some local packs include `glTF` assets, which should generally be the preferred runtime format for web-game implementation here
+- some packs may also include `FBX`, `OBJ`, `.blend`, images, source files, or mixed formats
+- license and usage terms may vary by pack, so verify them rather than assuming all assets are identical
 
 Use this practical rule:
 
 1. inspect `Free_Assets/` first
-2. select a coherent subset for the specific game
-3. prefer `glTF` files for runtime use
-4. copy or curate only the needed assets into the game's runtime asset area such as `public/assets/`
-5. create an index for the curated runtime assets
+2. shortlist the assets or packs that best match the specific game
+3. prefer `glTF` or `glb` files for runtime use when available
+4. choose one dominant visual family, and only mix packs if the styles are compatible enough for the prototype
+5. copy or curate only the needed assets into the game's runtime asset area such as `public/assets/`
+6. create an index for the curated runtime assets
 
 Do not build directly from a giant uncurated asset tree if you can avoid it. Curate a game-specific runtime subset first.
 
@@ -65,6 +72,38 @@ Reference documents:
 
 - `docs/FREE_ASSETS_SOURCE_INDEX.md`
 - `docs/FREE_ASSETS_CURATION_PLAN.md`
+
+Important note:
+
+- the reference docs are useful snapshots and examples, but if `Free_Assets/` has changed, inspect the actual folder and update or regenerate the inventory as needed
+
+## Asset Selection Heuristics
+
+When choosing assets for a new game, optimize for:
+
+- fit for the game concept and camera style
+- coverage of the required gameplay roles
+- silhouette readability
+- animation availability for actors
+- style cohesion across the first playable slice
+- runtime-friendly formats
+- clear license status
+- reasonable file size and loading complexity
+
+Prioritize these gameplay roles early:
+
+- player avatar
+- enemy or hazard set
+- environment or terrain set
+- pickup or reward set
+- one objective or goal prop
+
+If several candidate assets exist, prefer the one that is:
+
+- easier to read in motion
+- easier to normalize and load
+- more likely to support future expansion
+- less likely to force a style clash
 
 ## Default Track Selection
 
@@ -200,6 +239,11 @@ Also consult when using the local asset library:
 - `docs/FREE_ASSETS_SOURCE_INDEX.md`
 - `docs/FREE_ASSETS_CURATION_PLAN.md`
 
+Optional but useful on larger or changing asset libraries:
+
+- `docs/ASSET_SELECTION.md`
+- `docs/ASSET_AUDIT.md`
+
 ## Required Workflow
 
 Follow these phases in order unless the user explicitly asks for a shorter path.
@@ -236,17 +280,20 @@ Pick one of these:
 Preferred order:
 
 1. cohesive local repo assets from `Free_Assets/`
-2. other existing repo assets
-3. placeholder-first with later asset replacement
-4. external cohesive asset pack
-5. fully generated production art
+2. curated compatible mix of local repo assets
+3. other existing repo assets
+4. placeholder-first with later asset replacement
+5. external cohesive asset pack
+6. fully generated production art
 
 For 3D games:
 
 - inspect `Free_Assets/` before anything else
-- prefer GLTF or GLB asset packs
-- prefer the local `Ultimate Monsters` pack for enemy-driven prototypes
-- prefer the local `Platformer Game Kit - Dec 2021` pack for traversal, platforming, pickups, and modular environment pieces
+- do not assume a specific pack name in advance
+- prefer `glTF` or `glb` assets when available
+- prefer animated character assets for players and enemies
+- prefer packs or subsets that cover the core gameplay roles cleanly
+- prefer one dominant visual family, with only a small supporting mix when needed
 - preserve the original source packs in `Free_Assets/`
 - copy only the selected runtime subset into `public/assets/`
 - keep the file structure web-friendly
@@ -254,6 +301,7 @@ For 3D games:
 
 For 2D games:
 
+- inspect `Free_Assets/` and the repo for suitable 2D sources first
 - prefer consistent sprite or tile packs
 - do not assume frame sizes
 - plan an asset measurement pass before integration
@@ -263,6 +311,11 @@ For 2D games:
 If the project uses a nontrivial asset pack, create:
 
 - `public/assets/assets_index.json`
+
+If `Free_Assets/` has changed significantly or the source inventory is outdated, also consider updating:
+
+- `docs/FREE_ASSETS_SOURCE_INDEX.md`
+- `docs/ASSET_AUDIT.md`
 
 This file should summarize:
 
@@ -324,7 +377,8 @@ The PRD should define:
 - UI and feedback requirements
 - success and failure states
 - scope boundaries
-- which local asset pack or curated subset the game is based on
+- which local asset pack, external pack, or curated subset the game is based on
+- why those assets were chosen for the game
 
 Keep it practical. Avoid fluffy marketing language.
 
@@ -494,10 +548,11 @@ When using `threejs-builder`, follow these extra rules:
 
 Repo-specific guidance for 3D asset selection:
 
-- use `Free_Assets/Ultimate Monsters` first when you need enemies, creatures, or stylized character threats
-- use `Free_Assets/Platformer Game Kit - Dec 2021` first when you need characters, pickups, nature props, modular platforms, or level mechanics
-- prefer `glTF` over `FBX`, `OBJ`, or `.blend` for the actual web runtime
+- inspect the current `Free_Assets/` contents instead of assuming yesterday's inventory still applies
+- prefer `glTF` or `glb` over `FBX`, `OBJ`, or `.blend` for the actual web runtime
 - keep `Free_Assets/` as the source library and move curated runtime files into `public/assets/`
+- choose assets freely based on role coverage, animation usefulness, cohesion, and runtime simplicity
+- if no good local fit exists, then search externally or fall back to placeholders intentionally
 
 If there is a "camera problem," check whether it is really caused by:
 
@@ -521,7 +576,7 @@ When using `phaser-gamedev`, follow these extra rules:
 
 Repo-specific note:
 
-- `Free_Assets/Platformer Game Kit - Dec 2021` may still be useful as source reference material or for hybrid workflows, but this playbook should not assume those raw 3D source assets are directly appropriate for Phaser runtime usage without deliberate conversion or selection
+- `Free_Assets/` may grow to include 2D assets, source files, mixed-format packs, or hybrid libraries; verify runtime suitability rather than assuming every local asset is a direct Phaser drop-in
 
 For spritesheets:
 
@@ -547,16 +602,17 @@ If the user asks for a game from scratch, your default sequence should be:
 1. clarify the concept
 2. choose 2D or 3D
 3. choose the main skill
-4. inspect `Free_Assets/` for a matching local pack
-5. determine the curated runtime asset strategy
-6. create `assets_index.json` if needed
-7. create a concept anchor if needed
-8. write `docs/PRD.md`
-9. write `docs/TDD.md`
-10. write `docs/IMPLEMENTATION_PLAN.md`
-11. implement the first playable version
-12. playtest and refine
-13. add smoke coverage
+4. inspect and inventory `Free_Assets/` for matching local assets or packs
+5. choose assets based on fit, cohesion, format, animation support, and license
+6. determine the curated runtime asset strategy
+7. create `assets_index.json` if needed
+8. create a concept anchor if needed
+9. write `docs/PRD.md`
+10. write `docs/TDD.md`
+11. write `docs/IMPLEMENTATION_PLAN.md`
+12. implement the first playable version
+13. playtest and refine
+14. add smoke coverage
 
 ## Anti-Patterns
 
@@ -565,6 +621,8 @@ Avoid these mistakes:
 - building too much before the first playable loop exists
 - generating all core art first without gameplay validation
 - ignoring `Free_Assets/` and immediately searching for outside assets
+- hardcoding asset assumptions from outdated inventory docs after `Free_Assets/` has changed
+- mixing wildly incompatible styles without a clear reason
 - relying on chat context instead of saving documents
 - skipping the asset index on a big pack
 - over-testing before the game is playable
@@ -593,7 +651,7 @@ The goal is to make future game-building sessions stronger.
 If the user asks you to create a game and provides little direction, use this default stance:
 
 - choose a small achievable scope
-- inspect `Free_Assets/` and prefer a coherent local asset strategy
+- inspect `Free_Assets/` and choose assets based on concept fit, cohesion, runtime format, animation needs, and license
 - create written artifacts early
 - plan before broad coding
 - get to a playable loop fast
