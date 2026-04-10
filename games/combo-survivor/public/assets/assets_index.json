@@ -1,0 +1,132 @@
+{
+  "project": "Combo Survivor",
+  "version": 1,
+  "assets": [
+    {
+      "id": "player_character",
+      "category": "character",
+      "path": "characters/Character.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hero player model"
+    },
+    {
+      "id": "enemy_orc",
+      "category": "enemy",
+      "path": "enemies/Orc.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "ground patrol enemy"
+    },
+    {
+      "id": "enemy_demon",
+      "category": "enemy",
+      "path": "enemies/Demon.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "ground patrol enemy"
+    },
+    {
+      "id": "enemy_blob",
+      "category": "enemy",
+      "path": "enemies/GreenSpikyBlob.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "fast swarm enemy"
+    },
+    {
+      "id": "enemy_ghost",
+      "category": "enemy",
+      "path": "enemies/Ghost.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "flying ranged enemy"
+    },
+    {
+      "id": "enemy_yeti",
+      "category": "enemy",
+      "path": "enemies/Yeti.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "elite final-wave bruiser"
+    },
+    {
+      "id": "pickup_coin",
+      "category": "pickup",
+      "path": "pickups/Coin.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "xp shard stand-in"
+    },
+    {
+      "id": "pickup_heart",
+      "category": "pickup",
+      "path": "pickups/Heart.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "healing pickup"
+    },
+    {
+      "id": "pickup_thunder",
+      "category": "pickup",
+      "path": "pickups/Thunder.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "special charge pickup"
+    },
+    {
+      "id": "env_fence_straight",
+      "category": "environment",
+      "path": "environment/Fence_1.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "decorative boundary"
+    },
+    {
+      "id": "env_fence_corner",
+      "category": "environment",
+      "path": "environment/Fence_Corner.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "decorative corner boundary"
+    },
+    {
+      "id": "env_fence_middle",
+      "category": "environment",
+      "path": "environment/Fence_Middle.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "decorative fence segment"
+    },
+    {
+      "id": "env_rock_small",
+      "category": "environment",
+      "path": "environment/Rock_1.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "small rock dressing"
+    },
+    {
+      "id": "env_rock_large",
+      "category": "environment",
+      "path": "environment/Rock_2.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "large rock dressing"
+    },
+    {
+      "id": "env_plant_small",
+      "category": "environment",
+      "path": "environment/Plant_Small.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "small decorative plant"
+    },
+    {
+      "id": "env_plant_large",
+      "category": "environment",
+      "path": "environment/Plant_Large.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "large decorative plant"
+    },
+    {
+      "id": "env_rock_platform_medium",
+      "category": "environment",
+      "path": "environment/RockPlatforms_Medium.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "set dressing and cover"
+    },
+    {
+      "id": "env_rock_platform_large",
+      "category": "environment",
+      "path": "environment/RockPlatforms_Large.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "set dressing and cover"
+    }
+  ]
+}

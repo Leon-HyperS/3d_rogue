@@ -1,0 +1,118 @@
+{
+  "project": "Relic Run",
+  "version": 1,
+  "assets": [
+    {
+      "id": "player_character",
+      "category": "character",
+      "path": "characters/Character.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "hero player model"
+    },
+    {
+      "id": "enemy_orc",
+      "category": "enemy",
+      "path": "enemies/Orc.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "ground patrol enemy"
+    },
+    {
+      "id": "enemy_demon",
+      "category": "enemy",
+      "path": "enemies/Demon.gltf",
+      "sourcePack": "Ultimate Monsters",
+      "note": "ground patrol enemy"
+    },
+    {
+      "id": "pickup_key",
+      "category": "pickup",
+      "path": "pickups/Key.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "required to arm the objective chain"
+    },
+    {
+      "id": "mechanic_chest",
+      "category": "mechanic",
+      "path": "mechanics/Chest.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "final objective"
+    },
+    {
+      "id": "mechanic_door",
+      "category": "mechanic",
+      "path": "mechanics/Door.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "gate visual"
+    },
+    {
+      "id": "mechanic_lever",
+      "category": "mechanic",
+      "path": "mechanics/Lever.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "opens the gate after key collection"
+    },
+    {
+      "id": "env_fence_straight",
+      "category": "environment",
+      "path": "environment/Fence_1.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "decorative boundary"
+    },
+    {
+      "id": "env_fence_corner",
+      "category": "environment",
+      "path": "environment/Fence_Corner.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "decorative corner boundary"
+    },
+    {
+      "id": "env_fence_middle",
+      "category": "environment",
+      "path": "environment/Fence_Middle.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "decorative fence segment"
+    },
+    {
+      "id": "env_rock_small",
+      "category": "environment",
+      "path": "environment/Rock_1.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "small rock dressing"
+    },
+    {
+      "id": "env_rock_large",
+      "category": "environment",
+      "path": "environment/Rock_2.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "large rock dressing"
+    },
+    {
+      "id": "env_plant_small",
+      "category": "environment",
+      "path": "environment/Plant_Small.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "small decorative plant"
+    },
+    {
+      "id": "env_plant_large",
+      "category": "environment",
+      "path": "environment/Plant_Large.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "large decorative plant"
+    },
+    {
+      "id": "env_rock_platform_medium",
+      "category": "environment",
+      "path": "environment/RockPlatforms_Medium.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "set dressing and cover"
+    },
+    {
+      "id": "env_rock_platform_large",
+      "category": "environment",
+      "path": "environment/RockPlatforms_Large.gltf",
+      "sourcePack": "Platformer Game Kit - Dec 2021",
+      "note": "set dressing and cover"
+    }
+  ]
+}

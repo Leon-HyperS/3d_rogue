@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Combo Survivor</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #070a15;
+    }
+
+    body {
+      display: grid;
+      place-items: stretch;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #hud {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+      color: #f4f7ff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+    }
+
+    .panel {
+      align-self: flex-start;
+      min-width: 280px;
+      max-width: 360px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 13, 26, 0.72);
+      backdrop-filter: blur(12px);
+    }
+
+    h1, h2 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin: 8px 0 12px;
+      color: #b6c0db;
+      font-size: 13px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .bar {
+      width: 100%;
+      height: 10px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 100%;
+      border-radius: inherit;
+      transform-origin: left center;
+    }
+
+    #healthBar {
+      background: linear-gradient(90deg, #f26565, #ffbf6a);
+    }
+
+    #staminaBar {
+      background: linear-gradient(90deg, #67d8ff, #86fff1);
+    }
+
+    #xpBar {
+      background: linear-gradient(90deg, #ffd86a, #fff59a);
+    }
+
+    #skillList {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: #cad3eb;
+      font-size: 13px;
+    }
+
+    #skillList li + li {
+      margin-top: 6px;
+    }
+
+    #prompt {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 11;
+      transform: translateX(-50%);
+      min-width: 260px;
+      text-align: center;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(8, 12, 22, 0.86);
+      color: #f7fbff;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+    }
+
+    #prompt.visible {
+      opacity: 1;
+    }
+
+    #flash {
+      position: fixed;
+      inset: 0;
+      z-index: 12;
+      pointer-events: none;
+      background: rgba(255, 92, 92, 0.22);
+      opacity: 0;
+      transition: opacity 0.08s linear;
+    }
+
+    #banner {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    #banner.visible {
+      opacity: 1;
+    }
+
+    #bannerCard,
+    #draftCard {
+      width: min(92vw, 560px);
+      padding: 24px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(6, 10, 20, 0.9);
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    #bannerTitle {
+      font-size: 36px;
+    }
+
+    #bannerText {
+      margin: 10px 0 0;
+      color: #cad3eb;
+      font-size: 16px;
+    }
+
+    #draftOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      place-items: center;
+      background: rgba(6, 8, 18, 0.72);
+      pointer-events: auto;
+    }
+
+    #draftOverlay.visible {
+      display: grid;
+    }
+
+    #draftTitle {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    #draftSubtitle {
+      margin: 0 0 18px;
+      color: #cad3eb;
+    }
+
+    #draftChoices {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .draft-choice {
+      min-height: 180px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(31, 41, 72, 0.9), rgba(13, 18, 35, 0.98));
+      color: #f7fbff;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .draft-choice:hover,
+    .draft-choice.selected {
+      transform: translateY(-2px);
+      border-color: rgba(255, 224, 129, 0.7);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .draft-choice strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .draft-hotkey {
+      color: #ffd86a;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .help {
+      margin-top: 12px;
+      color: #a7b0c9;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="hud">
+    <div class="panel">
+      <h1>Combo Survivor</h1>
+      <p class="subtitle">Survive the arena, chain attacks, dodge through swarms, and draft new combat skills.</p>
+      <div class="stat-row"><span>Wave</span><strong id="wave">--</strong></div>
+      <div class="stat-row"><span>Timer</span><strong id="timer">--</strong></div>
+      <div class="stat-row"><span>Health</span><strong id="healthLabel">--</strong></div>
+      <div class="bar"><div id="healthBar" class="bar-fill"></div></div>
+      <div class="stat-row"><span>Stamina</span><strong id="staminaLabel">--</strong></div>
+      <div class="bar"><div id="staminaBar" class="bar-fill"></div></div>
+      <div class="stat-row"><span>XP</span><strong id="xpLabel">--</strong></div>
+      <div class="bar"><div id="xpBar" class="bar-fill"></div></div>
+      <div class="stat-row"><span>Level</span><strong id="level">1</strong></div>
+      <div class="stat-row"><span>Special</span><strong id="specialLabel">Ready</strong></div>
+      <div class="stat-row"><span>Status</span><strong id="status">Loading assets</strong></div>
+      <div class="help">Move: WASD | Attack: Space | Special: F | Dodge: Shift | Draft: 1/2/3 or Enter | Restart: R</div>
+    </div>
+
+    <div class="panel">
+      <h2>Build</h2>
+      <p class="subtitle">Drafted moves and passive effects.</p>
+      <ul id="skillList"></ul>
+    </div>
+  </div>
+
+  <div id="prompt"></div>
+  <div id="flash"></div>
+
+  <div id="banner">
+    <div id="bannerCard">
+      <h2 id="bannerTitle">Ready</h2>
+      <p id="bannerText"></p>
+    </div>
+  </div>
+
+  <div id="draftOverlay">
+    <div id="draftCard">
+      <h2 id="draftTitle">Level Up</h2>
+      <p id="draftSubtitle">Choose one upgrade to reshape this run.</p>
+      <div id="draftChoices">
+        <button id="draftChoice0" class="draft-choice" type="button"></button>
+        <button id="draftChoice1" class="draft-choice" type="button"></button>
+        <button id="draftChoice2" class="draft-choice" type="button"></button>
+      </div>
+      <p class="help">Press <strong>1</strong>, <strong>2</strong>, <strong>3</strong>, or <strong>Enter</strong> to confirm the selected card.</p>
+    </div>
+  </div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
